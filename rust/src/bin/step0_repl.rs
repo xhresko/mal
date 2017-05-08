@@ -1,26 +1,33 @@
-extern crate mal;
+use std::io;
+use std::io::Write;
 
-use mal::readline;
-
-// read
-fn read(str: String) -> String {
-    str
+fn READ(input: String) -> String {
+    return input;
 }
 
-// eval
-fn eval(ast: String) -> String {
-    ast
+
+fn EVAL(input: String) -> String {
+    return input;
 }
 
-// print
-fn print(exp: String) -> String {
-    exp
+fn PRINT(input: String){
+    println!("{}", input);
+}
+
+fn rep(input: String) {
+    PRINT(EVAL(READ(input)));
 }
 
 fn main() {
-    loop {
-        let line = readline::mal_readline("user> ");
-        match line { None => break, _ => () }
-        println!("{}", print(eval(read(line.unwrap()))));
+
+    while true {
+        let mut input = String::new();
+        print!("user> ");
+        io::stdout().flush();
+        io::stdin().read_line(&mut input);
+        if input == "" {
+            break;
+        }
+        rep(String::from(input.trim()));
     }
 }
